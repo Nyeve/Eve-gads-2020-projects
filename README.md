@@ -1,1 +1,1 @@
-# Eve-gads-2020-projects
+# Eve's GADS Project Submissions
