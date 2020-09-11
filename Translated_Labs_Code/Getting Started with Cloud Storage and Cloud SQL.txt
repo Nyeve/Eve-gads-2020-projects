@@ -1,0 +1,37 @@
+Google Cloud Fundamentals:Getting Started with Cloud Storage and Cloud SQL
+Objectives
+-Create a Cloud Storage bucket and place an image into it.
+
+-Create a Cloud SQL instance and configure it.
+
+-Connect to the Cloud SQL instance from a web server.
+
+-Use the image in the Cloud Storage bucket on a web page.
+
+#STEPS
+Task 2: Deploy a web server VM instance
+#Select the zone 
+gcloud config set compute/zone us-central1-a
+
+#You upload a pre-prepared startup script as metadata to your instance. 
+#Type the following command to clone the source code repository containing the script using Git.
+git clone \
+https://github.com/myochine/\
+cpo200-metadata-from-file \
+~/cpo200/cpo200-metadata-from-file
+
+
+gcloud compute instances create bloghost \
+--machine-type "n1-standard-1" \
+--image-project "debian-cloud" \
+--image "debian-9-stretch-" \
+--subnet "default"\
+--metadata-from-file \
+startup-script=install-web-d8.sh \
+--zone $CPO200_ZONE
+  
+ ## Installs apache
+
+
+104.155.132.170
+35.238.142.65

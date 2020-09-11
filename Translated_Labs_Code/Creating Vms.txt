@@ -1,0 +1,76 @@
+##Lab:Creating Virtual Machines
+#Objectives:
+#In this lab, you explore the available options for VMs and see the differences between locations.
+
+#In this lab, you learn how to perform the following tasks:
+
+#Create several standard VMs
+
+#Create advanced VMs
+##Steps
+#Task 1: Create a utility virtual machine
+#Select the zone
+gcloud config set compute/zone us-central1-c
+#create utility-vm
+gcloud compute instances create utility-vm --network "default" \
+--subnet "default" \
+--no-address \
+--machine-type "n1-standard-1" \
+--image-project "debian-cloud" \
+--image "debian-9-stretch-v20190213"
+
+#Explore the VM and view logs
+gcloud logging logs list
+
+##Task 2: Create a Windows virtual machine
+#To list
+#To select the zone for my vm
+gcloud config set compute/zone europe-west2-a
+
+#create firewall rule
+gcloud compute firewall-rules create default-allow-https \
+--allow=tcp:443 \
+--direction=INGRESS \
+--priority=1000 \
+--network=default \
+--source-ranges=0.0.0.0/0 \
+--target-tags=https-server
+
+#create windows-vm
+gcloud compute images list
+
+gcloud compute instances create "windows-vm" \
+--network "default" \
+--subnet "default" \
+--machine-type "n1-standard-2" \
+--image-project "windows-cloud" \
+--image-family "windows-server-2016-dc-core-v20200908" \
+--boot-disk-size "100" \
+--boot-disk-type "pd-ssd" \
+--tags "http-server"
+
+#create password for the windows-vm
+gcloud compute reset-windows-password windows-vm
+Prompts to change the password
+
+##Task 3: Create a custom virtual machine
+#Define default zone
+gcloud config set compute/zone us-west1-b
+#create custom vm
+gcloud compute instances create custom-vm \
+    --custom-cpu 6 --custom-memory 32
+
+#connect to custom-vm through ssh
+gcloud compute ssh custom-vm
+
+#check Ram details
+sudo dmidecode -t 17
+
+#verify number of processors
+nproc
+
+check the details of cpus
+lscpu
+
+#exit ssh terminal
+exit
