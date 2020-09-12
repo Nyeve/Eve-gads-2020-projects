@@ -33,5 +33,4 @@ startup-script=install-web-d8.sh \
  ## Installs apache
 
 
-104.155.132.170
-35.238.142.65
+
