@@ -51,14 +51,14 @@ gcloud compute instances create "windows-vm" \
 
 #create password for the windows-vm
 gcloud compute reset-windows-password windows-vm
-Prompts to change the password
+#Prompts to change the password.
 
 ##Task 3: Create a custom virtual machine
 #Define default zone
 gcloud config set compute/zone us-west1-b
 #create custom vm
 gcloud compute instances create custom-vm \
-    --custom-cpu 6 --custom-memory 32
+ --custom-cpu 6 --custom-memory 32
 
 #connect to custom-vm through ssh
 gcloud compute ssh custom-vm
