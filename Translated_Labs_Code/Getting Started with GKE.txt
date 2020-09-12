@@ -1,0 +1,63 @@
+#Lab:Google Cloud Fundamentals: Getting Started with GKE
+#In this lab, you learn how to perform the following tasks:
+
+#Provision a Kubernetes cluster using Kubernetes Engine.
+
+#Deploy and manage Docker containers using kubectl.
+
+#Task 2: Confirm that needed APIs are enabled
+#Check available APIs
+gcloud services list --available
+#If you don't see the API listed, that means you haven't been granted access to enable the 
+
+#Enable Kubernetes API and Container registry API
+gcloud services enable container.googleapis.com-Kubernetes API
+gcloud services enable containerregistry.googleapis.com-Container registry
+
+#Task 3: Start a Kubernetes Engine cluster
+#Select the zone to create and deploy kubernetes clusters.
+#Place zone into an environment variable called MY_ZONE
+export MY_ZONE=us-central1-a
+
+#Start a Kubernetes cluster managed by Kubernetes Engine. 
+#Name the cluster webfrontend and configure it to run 2 nodes:
+#After several minute create a cluster as Kubernetes Engine provisions virtual machines for you
+
+#Check installed version of kubernetes
+kubectl version
+#Displays the client and server version among other details.
+
+#View running nodes at compute engine instances
+gcloud compute instances list --zones $MY_ZONE
+#The two nodes created can be seen.
+
+#Task 4: Run and deploy a container
+#launch a single instance of the nginx container. (Nginx is a popular web server.)
+kubectl create deploy nginx --image=nginx:1.17.10
+deployment.apps/nginx created
+
+#View the pod running the nginx container:
+kubectl get pods
+
+#Expose the nginx container to the Internet:
+kubectl expose deployment nginx --port 80 --type LoadBalancer
+
+#View the new service
+kubectl get services
+
+#use the displayed external IP address to test and contact the nginx container remotely
+#Open a new web browser tab and paste your cluster's external IP address into the address bar. The default home page of the Nginx browser is displayed.
+
+#Scale up the number of pods running on your service:
+kubectl scale deployment nginx --replicas 4
+#The result is the 4 pods running
+
+#Confirm that Kubernetes has updated the number of pods:
+kubectl get pods
+
+#Confirm that your external IP address has not changed
+kubecl get services
+
+#nginx web server still responds as the IP external ip address did not change on scaling.
+
+#
