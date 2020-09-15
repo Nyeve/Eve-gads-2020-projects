@@ -11,8 +11,8 @@ gcloud services list --available
 #If you don't see the API listed, that means you haven't been granted access to enable the 
 
 #Enable Kubernetes API and Container registry API
-gcloud services enable container.googleapis.com-Kubernetes API
-gcloud services enable containerregistry.googleapis.com-Container registry
+gcloud services enable container.googleapis.com
+gcloud services enable containerregistry.googleapis.com
 
 #Task 3: Start a Kubernetes Engine cluster
 #Select the zone to create and deploy kubernetes clusters.
